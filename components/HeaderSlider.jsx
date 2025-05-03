@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 
 const HeaderSlider = () => {
-    debugger
     const SliderData = [
       {
         id: 1,
@@ -52,12 +51,10 @@ const HeaderSlider = () => {
           transform: `translateX(-${currentSlider * 100}%)`,
         }}
       >
-        {SliderData.map((slide, index) => {
-          return (
-            <>
+        {SliderData.map((slide, index) => (
               <div
                 key={slide.id}
-                className="flex flex-col-reverse md:flex-row items-center justify-between bg-[#E6E9F3] py-8 md:px-14 px-5 mt-6 rounded-xl min-w-full"
+                className="flex flex-col-reverse md:flex-row items-center justify-between bg-[#E6E9C3] py-8 md:px-14 px-5 mt-6 rounded-xl min-w-full"
               >
                 <div className="md:pl-8 mt-10 md:mt-0">
                   <p className="md:text-base text-orange-600 pb-1">
@@ -88,10 +85,8 @@ const HeaderSlider = () => {
                   />
                 </div>
               </div>
-              ;
-            </>
-          );
-        })}
+          
+        ))}
       </div>
       <div className="flex items-center justify-center gap-2 mt-8">
         {SliderData.map((_, index) => (
