@@ -1,21 +1,10 @@
-'use client'
+"use client";
 
-import React, { useEffect, useState } from "react";
-import { productService } from "../lib/ProductService";
-// import Image from 'next/image';
+import React from "react";
+import { useAppContext } from "@/context/useContext";
 
 const HomeProduct = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    productService
-      .getAllProducts()
-      .then((data) => setProducts(data.products))
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, []);
-
+  const {products,loading } = useAppContext();
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -26,23 +15,26 @@ const HomeProduct = () => {
             src={product.thumbnail}
             alt={product.title}
             className={` group-hover:scale-105 transition object-cover w-4/5 h-4/5 md:w-full md:h-full`}
-            // width={800}
-            //         height={800}
+          
           />
           <h2 className="md:text-base font-medium pt-2 pb-2 text-center w-full truncate">
             {product.title}
           </h2>
           <div className="flex justify-between mt-3">
-            <p className="text-xs text-gray-600">
-              {product.brand} • {product.category}
+            <p className="text-xs text-gray-600 ">
+              {product.brand && product.category ? (
+                <>
+                  {product.brand} • {product.category}
+                </>
+              ) : (
+                <>{product.category}</>
+              )}
             </p>
-            <p className="text-xs text-red-500">
-              {product.availabilityStatus}
-            </p>
+            <p className="text-xs text-red-500">{product.availabilityStatus}</p>
           </div>
 
           <div className="flex justify-between gap-5 mt-2">
-            <p className="text-sm font-semibold text-gray-500">
+            <p className="text-sm font-semibold text-gray-500 ">
               Stock: {product.stock}
             </p>
             <p className="text-sm bg-yellow-100 text-yellow-700  px-2 py-1 rounded">
