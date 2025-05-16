@@ -1,4 +1,6 @@
-import { useAppContext } from "@/context/useContext";
+"use client";
+
+import { useAppContext } from "./../context/useContext";
 
 // const { useState } = require("react");
 

@@ -1,8 +1,7 @@
 "use client";
-import { productService } from "@/lib/ProductService";
+import { productService } from "../lib/ProductService";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
-
 export const AppContext = createContext();
 
 export const useAppContext = () => {
@@ -15,6 +14,7 @@ export const AppContextProvider = (props) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cartItems, setCartItems] = useState([]);
+  const [isSeller, setIsSeller] = useState(true);
 
   const addToCart = (productId) => {
     setCartItems((prevItems) => {
@@ -32,6 +32,14 @@ export const AppContextProvider = (props) => {
     });
   };
 
+  const removeFromCart = (productId) => {
+    const productDeleted = cartItems.find((item) => item.id === productId);
+    if (productDeleted) {
+      setCartItems((prevItems) =>
+        prevItems.filter((item) => item.id !== productId)
+      );
+    }
+  };
   useEffect(() => {
     productService
       .getAllProducts()
@@ -49,6 +57,9 @@ export const AppContextProvider = (props) => {
     router,
     addToCart,
     cartItems,
+    isSeller,
+    setIsSeller,
+    removeFromCart,
   };
 
   return (

@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { assets } from "@/assets/assets";
-import ProductCard from "@/components/ProductCard";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { assets } from "../../../assets/assets";
+import ProductCard from "../../../components/ProductCard";
+import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import Loading from "@/components/Loading";
-import { useAppContext } from "@/context/useContext";
+import Loading from "../../../components/Loading";
+import { useAppContext } from "../../../context/useContext";
 import React from "react";
 
 const Product = () => {
@@ -163,10 +163,10 @@ const Product = () => {
             <div className="w-28 h-0.5 bg-orange-600 mt-2"></div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mt-6 pb-14 w-full">
+          <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mt-6 pb-14 w-full">
             {products
               .filter((p) => p.id !== product.id)
-              .slice(0, expandProduct ? 10 : 5)
+              .slice(0, expandProduct ? 15 : 5)
               .map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}

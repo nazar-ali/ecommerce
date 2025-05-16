@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { useAppContext } from "@/context/useContext";
-import Product from "@/app/product/[id]/page";
+import { useAppContext } from "../context/useContext";
+import Product from "../app/product/[id]/page";
 import ProductCard from "./ProductCard";
 
 const HomeProduct = () => {
-  const { products } = useAppContext();
+  const { products, router } = useAppContext();
 
   return (
     <>
@@ -20,10 +20,10 @@ const HomeProduct = () => {
           ))}
         </div>
         <button
-          // onClick={() => {
-          //   router.push("/all-products");
-          // }}
-          className="px-12 py-2.5 border rounded text-gray-500/70 hover:bg-slate-50/90 transition"
+          onClick={() => {
+            router.push("/all-products");
+          }}
+          className="cursor-pointer px-12 py-2.5 border rounded text-gray-500/70 hover:bg-slate-50/90 transition"
         >
           See more
         </button>

@@ -1,9 +1,9 @@
 "use client";
 
-import { useAppContext } from "@/context/useContext";
+import { useAppContext } from "../../context/useContext";
 
 const Cart = () => {
-  const { cartItems } = useAppContext();
+  const { cartItems, removeFromCart } = useAppContext();
 
   return (
     <div className="p-6">

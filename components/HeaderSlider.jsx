@@ -1,4 +1,4 @@
-const { assets } = require("@/assets/assets");
+const { assets } = require("../assets/assets");
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
