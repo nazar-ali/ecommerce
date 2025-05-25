@@ -2,35 +2,14 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useAppContext } from "../../context/useContext";
-import SignInService from "../../lib/SignInService";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { assets } from "../../assets/assets";
 import Image from "next/image";
 
 export default function SignIn() {
-  const { router } = useAppContext();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const [userData, setUserData] = useState({});
-  console.log(userData);
-  const handleChange = ({ target: { name, value } }) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await SignInService.login(formData.email, formData.password);
-      toast(res.message);
-      setUserData(res);
-      router.push("/");
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+  const { router, handleChange, handleSignIn, formData, userData } =
+    useAppContext();
 
   const navigateTo = (path) => {
     router.push(path);
@@ -65,7 +44,7 @@ export default function SignIn() {
           <div className="text-right">
             <button
               type="button"
-              onClick={() => console.log("Forgot Password clicked")}
+              onClick={() => router.push("/forgotPassword")}
               className="text-sm text-blue-600 hover:underline"
             >
               Forgot password?

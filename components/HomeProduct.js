@@ -2,11 +2,13 @@
 
 import React, { useState } from "react";
 import { useAppContext } from "../context/useContext";
-import Product from "../app/product/[id]/page";
 import ProductCard from "./ProductCard";
 
 const HomeProduct = () => {
-  const { products, router } = useAppContext();
+  const { products, router, searchTerm } = useAppContext();
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
@@ -14,10 +16,16 @@ const HomeProduct = () => {
         <p className="text-2xl font-medium text-left w-full">
           Popular products
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 flex-col items-center gap-6 mt-6 pb-14 w-full">
-          {products.map((product, index) => (
-            <ProductCard key={index} product={product} />
-          ))}
+        <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 flex-col items-center gap-6 mt-6 pb-14 w-full">
+          {filteredProducts.length ? (
+            filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))
+          ) : (
+            <div className="flex justify-center items-center ">
+              product not found
+            </div>
+          )}
         </div>
         <button
           onClick={() => {

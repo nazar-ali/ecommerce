@@ -6,10 +6,15 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import DashboardPage from "../dashoard/page";
 export default async function Home() {
+  // const { toggleCart, isCartOpen } = useAppContext();
   const cookieStore = await cookies();
   const token = cookieStore.get("token");
   if (!token) {
     redirect("/sign-up");
   }
-  return <DashboardPage />;
+  return (
+    <>
+      <DashboardPage />;
+    </>
+  );
 }
