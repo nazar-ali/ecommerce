@@ -1,6 +1,6 @@
 // app/resetPassword/page.js
 import { Suspense } from "react";
-import { ResetPassword } from "./ResetPassword";
+import ResetPassword from "./ResetPassword";
 
 export default function Page() {
   return (
