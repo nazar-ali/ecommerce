@@ -1,9 +1,16 @@
+import Image from "next/image";
 const OrderPlaced = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md transition duration-300 ease-in-out">
         <div className="flex justify-center mb-6">
-          <img src="/assets/success.png" alt="Success" className="h-16 w-16" />
+          <Image
+            src="/assets/success.png"
+            width={64}
+            height={64}
+            alt="Success"
+            className="h-16 w-16"
+          />
         </div>
         <h1 className="text-center text-2xl font-semibold text-gray-800 mb-4">
           Order Placed Successfully!
