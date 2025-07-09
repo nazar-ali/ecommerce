@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import ShippingCard from "./shipping";
-import PaymentCard from "./Payment";
+import ShippingCard from "../checkout/shipping";
+import PaymentCard from "../checkout/payment";
 
 const Checkout = () => {
   const [isOpen, setIsOpen] = useState(true);
