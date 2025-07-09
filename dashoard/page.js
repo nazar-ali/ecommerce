@@ -1,8 +1,8 @@
 "use client";
-import Footer from "../components/Footer";
+import Footer from "../components/common/Footer";
 import HeaderSlider from "../components/HeaderSlider";
 import HomeProduct from "../components/HomeProduct.js";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/common/Navbar";
 import CartSidebar from "../components/CartSidebar";
 const DashboardPage = () => {
   return (

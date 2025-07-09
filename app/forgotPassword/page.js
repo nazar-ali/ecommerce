@@ -3,9 +3,9 @@
 
 import { useState } from "react";
 import { assets } from "../../assets/assets";
-import Input from "../../components/Input";
+import Input from "../../components/common/Input";
 import { ToastContainer } from "react-toastify";
-import Button from "../../components/Button";
+import Button from "../../components/common/Button";
 import Image from "next/image";
 
 export default function ForgotPassword() {

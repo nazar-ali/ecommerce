@@ -1,16 +1,16 @@
 "use client";
 import { set } from "mongoose";
-import { assets } from "../assets/assets";
-import CrossIcon from "../assets/CrossIcon";
-import Menue from "../assets/Menue";
-import { useAppContext } from "./../context/useContext";
+import { assets } from "../../assets/assets";
+import CrossIcon from "../../assets/CrossIcon";
+import Menue from "../../assets/Menue";
+import { useAppContext } from "../../context/useContext";
 import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { FaCartPlus } from "react-icons/fa6";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import CartSidbar from "./CartSidebar";
+import CartSidbar from "../CartSidebar";
 
 const Navbar = () => {
   const {
@@ -28,6 +28,7 @@ const Navbar = () => {
   } = useAppContext();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef();
+  console.log("cartItems", cartItems);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -48,6 +49,8 @@ const Navbar = () => {
             src={assets.logo}
             onClick={() => Router.push("/")}
             className="cursor-pointer w-28 md:w-32 rounded-full"
+            width={100}
+            height={100}
           />
           <div className="flex-1 flex items-center  justify-end">
             <form className="relative max-sm:w-3/4 mr-4 flex-grow max-w-lg">
@@ -70,13 +73,10 @@ const Navbar = () => {
               <Link href="/" className="hover:text-gray-900 transition">
                 Home
               </Link>
-              <Link
-                href="/all-product"
-                className="hover:text-gray-900 transition"
-              >
+              <Link href="/shope" className="hover:text-gray-900 transition">
                 Shop
               </Link>
-              <Link href="/" className="hover:text-gray-900 transition">
+              <Link href="/aboutUs" className="hover:text-gray-900 transition">
                 About Us
               </Link>
               <Link href="/" className="hover:text-gray-900 transition">
@@ -94,7 +94,7 @@ const Navbar = () => {
           </div>
           <div className="ml-4 flex gap-4">
             <ul className="hidden md:flex items-center gap-4" ref={dropdownRef}>
-              <div className="relative">
+              <div className="relative ">
                 <button
                   className="flex items-center  transition"
                   onClick={() => setOpen(!open)}

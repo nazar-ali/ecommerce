@@ -52,6 +52,7 @@ export const AppContextProvider = (props) => {
       setCartItems((prevItems) => {
         prevItems.filter((item) => item.id !== productId);
       });
+      toast.warning(`${productDeleted.title} removed from cart`);
     }
   };
   const handleSignIn = async (e) => {

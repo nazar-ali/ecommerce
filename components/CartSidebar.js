@@ -2,6 +2,7 @@
 
 import { useAppContext } from "../context/useContext";
 import Image from "next/image";
+import { ToastContainer } from "react-toastify";
 const CartSidbar = () => {
   const { cartItems, removeFromCart, isCartOpen, setIsCartOpen } =
     useAppContext();
@@ -69,47 +70,57 @@ const CartSidbar = () => {
                   {/* Cart Items */}
                   <div className="mt-8">
                     <div className="flow-root">
-                      {cartItems.length === 0 ? (
+                      {cartItems?.length === 0 ? (
                         <p className="text-gray-500">Your cart is empty.</p>
                       ) : (
                         <ul
                           role="list"
                           className="-my-6 divide-y divide-gray-200"
                         >
-                          {cartItems.map((item) => (
-                            <li key={item.id} className="flex py-6">
-                              <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <Image
-                                  src={item.thumbnail}
-                                  alt={item.title}
-                                  className="size-full object-cover"
-                                />
-                              </div>
+                          {cartItems?.length > 0 ? (
+                            cartItems.map((item) => (
+                              <li key={item.id} className="flex py-6">
+                                <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                  <Image
+                                    src={item.thumbnail}
+                                    alt={item.title}
+                                    width={96}
+                                    height={96}
+                                    className="size-full object-cover"
+                                  />
+                                </div>
+                                <div className="ml-4 flex flex-1 flex-col">
+                                  <div>
+                                    <div className="flex justify-between text-base font-medium text-gray-900">
+                                      <h3>{item.title}</h3>
+                                      <p className="ml-4">${item.price}</p>
+                                    </div>
+                                    <p className="mt-1 text-sm text-gray-500">
+                                      Qty: {item.quantity}
+                                    </p>
+                                  </div>
+                                  <div className="flex flex-1 items-end justify-between text-sm">
+                                    <div className="flex">
+                                      <button
+                                        onClick={() => removeFromCart(item.id)}
+                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                      >
+                                        Remove
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </li>
+                            ))
+                          ) : (
+                            <li className="flex py-6">
                               <div className="ml-4 flex flex-1 flex-col">
-                                <div>
-                                  <div className="flex justify-between text-base font-medium text-gray-900">
-                                    <h3>{item.title}</h3>
-                                    <p className="ml-4">${item.price}</p>
-                                  </div>
-                                  <p className="mt-1 text-sm text-gray-500">
-                                    Qty: {item.quantity}
-                                  </p>
-                                </div>
-                                <div className="flex flex-1 items-end justify-between text-sm">
-                                  <div className="flex">
-                                    <button
-                                      onClick={() => {
-                                        removeFromCart(item.id);
-                                      }}
-                                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                                    >
-                                      Remove
-                                    </button>
-                                  </div>
-                                </div>
+                                <p className="text-gray-500">
+                                  Your cart is empty.
+                                </p>
                               </div>
                             </li>
-                          ))}
+                          )}
                         </ul>
                       )}
                     </div>
@@ -117,7 +128,7 @@ const CartSidbar = () => {
                 </div>
 
                 {/* Footer Summary */}
-                {cartItems.length > 0 && (
+                {cartItems?.length > 0 ? (
                   <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal</p>
@@ -148,12 +159,13 @@ const CartSidbar = () => {
                       </p>
                     </div>
                   </div>
-                )}
+                ) : null}
               </div>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
