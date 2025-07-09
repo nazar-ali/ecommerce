@@ -10,15 +10,16 @@ import { useParams } from "next/navigation";
 import Loading from "../../../components/Loading";
 import { useAppContext } from "../../../context/useContext";
 import React from "react";
+import BuyNow from "../../../components/BuyNow";
 
 const Product = () => {
   const { id } = useParams();
-  const { products, router, addToCart } = useAppContext();
+  const { products, router, addToCart, loading } = useAppContext();
   const [expandProduct, setExpandProduct] = useState(false);
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
   const [isClient, setIsClient] = useState(false);
-
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -35,7 +36,6 @@ const Product = () => {
 
   if (!isClient || !products) return <Loading />;
   if (!product) return <p className="text-center mt-20">Product not found.</p>;
-
   return (
     <>
       <Navbar />
@@ -43,7 +43,7 @@ const Product = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           {/* Left image panel */}
           <div className="px-5 lg:px-16 xl:px-20">
-            <div className="rounded-lg overflow-hidden bg-gray-500/10 mb-4 group">
+            <div className="rounded-lg overflow-hidden bg-red-500/10 mb-4 group">
               <Image
                 src={mainImage || product.thumbnail}
                 alt="product"
@@ -65,12 +65,12 @@ const Product = () => {
             <div className="grid grid-cols-4 gap-4 mt-4">
               <div
                 onClick={() => setMainImage(product.thumbnail)}
-                className="cursor-pointer rounded-lg overflow-hidden bg-gray-500/10"
+                className="cursor-pointer rounded-lg overflow-hidden bg-orange-200"
               >
                 <Image
                   src={product.thumbnail}
                   alt="thumbnail"
-                  className="w-full h-auto object-cover mix-blend-multiply"
+                  className="w-full h-auto object-coverm mix-blend-multiply"
                   width={1280}
                   height={720}
                 />
@@ -141,10 +141,7 @@ const Product = () => {
                 Add to Cart
               </button>
               <button
-                onClick={() => {
-                  addToCart(product.id);
-                  // router.push("/cart");
-                }}
+                onClick={() => router.push("/checkout")}
                 className="w-full py-3.5 bg-orange-500 text-white hover:bg-orange-600 transition"
               >
                 Buy now
@@ -181,6 +178,8 @@ const Product = () => {
         </div>
       </div>
       <Footer />
+
+      {/* {isOpen && <BuyNow isOpen={isOpen} setIsOpen={setIsOpen} />} */}
     </>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppContext } from "./../context/useContext";
-
+import Image from "next/image";
 // const { useState } = require("react");
 
 const ProductCard = ({ product }) => {
@@ -18,46 +18,53 @@ const ProductCard = ({ product }) => {
           router.push("/product/" + product.id);
           scrollTo(0, 0);
         }}
-        className=" flex flex-col cursor-pointer group p-1 relative bg-gray-500/10 rounded-lg max-sm:w-full max-sm:items-center md:w-full w-full h-full "
+        className="cursor-pointer bg-white rounded-xl shadow-md overflow-hidden group transition hover:shadow-lg  border border-gray-200"
       >
-        <img
-          src={product.thumbnail}
-          alt={product.title}
-          className={` group-hover:scale-105 transition object-cover w-4/5 h-4/5 md:w-full md:h-full`}
-        />
-        <h2 className="md:text-base font-medium pt-2 pb-2 text-center w-full truncate">
-          {product.title}
-        </h2>
-        <div className="flex justify-between mt-3">
-          <p className="text-xs text-gray-600 ">
-            {product.brand && product.category ? (
-              <>
-                {product.brand} • {product.category}
-              </>
-            ) : (
-              <>{product.category}</>
-            )}
-          </p>
-          <p className="text-xs text-red-500">{product.availabilityStatus}</p>
+        {/* Product Image */}
+        <div className="aspect-[4/3] bg-gray-100 overflow-hidden">
+          <Image
+            src={product.thumbnail}
+            alt={product.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
         </div>
 
-        <div className="flex justify-between gap-5 mt-2">
-          <p className="text-sm font-semibold text-gray-500 ">
-            Stock: {product.stock}
-          </p>
-          <p className="text-sm bg-yellow-100 text-yellow-700  px-2 py-1 rounded">
-            {product.discountPercentage}%
-          </p>
-        </div>
+        {/* Card Content */}
+        <div className="p-4 space-y-2">
+          {/* Title */}
+          <h2 className="text-sm font-semibold text-gray-800 truncate text-center">
+            {product.title}
+          </h2>
 
-        {/* <p className="w-full text-xs text-gray-500/70 max-sm:hidden truncate">{product.description}</p> */}
+          {/* Brand & Category */}
+          <div className="flex justify-between text-xs text-gray-500">
+            <p>{product.brand}</p>
+            <p>{product.category}</p>
+          </div>
 
-        <div className="mt-3 text-xs flex gap-5 justify-between text-gray-500">
-          <p className="text-xl font-semibold text-green-600">
-            ${product.price}
-          </p>
-          <button className="  md:block sm:block px-4 max-sm:py-.5 py-1.5 text-gray-500 border border-gray-500/20 max-sm:rounded-xxl rounded-full bg-[#ed7e12] text-xs text-white  transition">
-            Buy now
+          {/* Availability & Stock */}
+          <div className="flex justify-between text-xs mt-1">
+            <p className="text-gray-500">Stock: {product.stock}</p>
+            <p className="text-red-500">{product.availabilityStatus}</p>
+          </div>
+
+          {/* Price & Discount */}
+          <div className="flex justify-between items-center mt-2">
+            <p className="text-lg font-bold text-green-600">${product.price}</p>
+            <span className="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full font-semibold">
+              {product.discountPercentage}% OFF
+            </span>
+          </div>
+
+          {/* Buy Now Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation(); // prevent triggering parent click
+              router.push("/checkout");
+            }}
+            className="w-full mt-3 bg-orange-600 hover:bg-orange-700 text-white text-xs font-medium py-2 rounded-md transition"
+          >
+            Buy Now
           </button>
         </div>
       </div>

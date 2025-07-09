@@ -2,7 +2,6 @@
 
 import { useAppContext } from "../context/useContext";
 import Image from "next/image";
-
 const CartSidbar = () => {
   const { cartItems, removeFromCart, isCartOpen, setIsCartOpen } =
     useAppContext();
@@ -80,7 +79,7 @@ const CartSidbar = () => {
                           {cartItems.map((item) => (
                             <li key={item.id} className="flex py-6">
                               <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <img
+                                <Image
                                   src={item.thumbnail}
                                   alt={item.title}
                                   className="size-full object-cover"
@@ -92,7 +91,6 @@ const CartSidbar = () => {
                                     <h3>{item.title}</h3>
                                     <p className="ml-4">${item.price}</p>
                                   </div>
-                                  {/* Optional: Add color or variant if needed */}
                                   <p className="mt-1 text-sm text-gray-500">
                                     Qty: {item.quantity}
                                   </p>
@@ -130,7 +128,7 @@ const CartSidbar = () => {
                     </p>
                     <div className="mt-6">
                       <a
-                        href="#"
+                        href="/checkout"
                         className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700"
                       >
                         Checkout
