@@ -59,7 +59,7 @@ export default function SignIn() {
           </Button>
 
           <div className="text-center text-sm text-gray-600 mt-4">
-            Don't have an account?{" "}
+            Do not have an account?{" "}
             <button
               type="button"
               onClick={() => navigateTo("/sign-up")}
