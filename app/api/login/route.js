@@ -29,7 +29,7 @@ export async function POST(req) {
     console.log(email, password);
     if (!email || !password) {
       return NextResponse.json(
-        { message: "Invalid email or password" },
+        { message: "Invalid email or password" }, 
         { status: 400 }
       );
     }
